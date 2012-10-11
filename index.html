@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Symfony2 + Vagrant = &hearts;</title>
+    <meta name="viewport" content="width=device-width, maximum-scale=1">
+    <link rel="stylesheet" href="foundation.min.css">
+    <style type="text/css">
+        .github {
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+
+        .attached {
+            margin: 15px;
+        }
+
+        .installation h4 {
+            text-indent: -26px;
+            margin-left: 26px;
+        }
+
+        .installation p {
+            margin-left: 26px;
+        }
+
+        .installation pre {
+            margin-bottom: 17px;
+            padding: 10px;
+            background: white;
+            overflow-x: auto;
+        }
+
+        code {
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+
+<div class="attached">
+    <h1>Virtual Symfony2 Development Environment</h1>
+
+    <h2 class="subheader">Based on&nbsp;<a href="http://vagrantup.com" target="_blank">Vagrant</a>,
+        <a href="https://www.virtualbox.org" target="_blank">VirtualBox</a>,
+        <a href="http://www.debian.org" target="_blank">Debian</a>,
+        and&nbsp;<a href="http://www.dotdeb.org" target="_blank">Dotdeb</a></h2>
+</div>
+
+<div class="row">
+    <div class="ten columns">
+        <div class="installation panel">
+            <h3>Installation</h3>
+
+            <h4 class="subheader">1. Download and
+                install&nbsp;<a href="https://www.virtualbox.org/wiki/Downloads" target="_blank">VirtualBox</a></h4>
+
+            <h4 class="subheader">2. Download and
+                install&nbsp;<a href="http://downloads.vagrantup.com" target="_blank">Vagrant</a></h4>
+
+            <h4 class="subheader">3. Create file named <code>Vagrantfile</code> in&nbsp;your project root
+                with that content:</h4>
+
+<pre>Vagrant::Config.run do |config|
+    config.vm.box = "symfony"
+    config.vm.box_url = "http://vagrant.rithis.com/symfony.box"
+    config.vm.network :hostonly, "192.168.33.10"
+end</pre>
+
+            <p>You can change IP address of&nbsp;your Vagrant virtual machine,
+                but&nbsp;<a href="http://vagrantup.com/v1/docs/host_only_networking.html" target="_blank">be&nbsp;careful</a>.</p>
+
+            <p>If you're using OS X or&nbsp;Linux you&nbsp;can use nfs instead&nbsp;of VirtualBox shared folders
+                for&nbsp;best performance:</p>
+
+<pre>Vagrant::Config.run do |config|
+    config.vm.box = "symfony"
+    config.vm.box_url = "http://vagrant.rithis.com/symfony.box"
+    config.vm.network :hostonly, "192.168.33.10"
+    config.vm.share_folder("v-root", "/vagrant", ".", :nfs => true)
+end</pre>
+
+            <h4 class="subheader">4. Run shell command <code>vagrant up</code>
+                from your&nbsp;project root directory</h4>
+
+            <h4 class="subheader">5. Open <a href="http://192.168.33.10" target="_blank">http://192.168.33.10</a>
+                in&nbsp;your browser</h4>
+
+            <p>If you're already using database in&nbsp;your project, you&nbsp;need to update database&nbsp;schema.</p>
+        </div>
+    </div>
+
+    <div class="two columns">
+        <div class="panel">
+            <p><span class="label">nginx</span> <span class="label">php5-apc</span> <span class="label">php5-cli</span>
+                <span class="label">php5-curl</span> <span class="label">php5-fpm</span>
+                <span class="label">php5-gd</span> <span class="label">php5-intl</span>
+                <span class="label">php5-mcrypt</span> <span class="label">php5-pgsql</span>
+                <span class="label">php5-sqlite</span> <span class="label">php5-xdebug</span>
+                <span class="label">postgresql</span></p>
+        </div>
+    </div>
+</div>
+
+<div class="attached">
+    <p class="right">2012 &copy; <a href="http://rithis.com" target="_blank">Rithis Studio LLC</a></p>
+</div>
+
+</body>
+</html>
